@@ -48,9 +48,10 @@
     }
 
     .menu-title {
+    text-align: center; /* 텍스트 가운데 정렬 */
     font-weight: bold; /* 굵은 글씨체 */
     font-size: 20px; /* 폰트 크기 */
-    margin-bottom: 20px; /* 제목과 메뉴 항목 사이의 간격 */
+    margin-bottom: 35px; /* 제목과 메뉴 항목 사이의 간격 */
     color: #F9F4F5;
     }
 
@@ -68,8 +69,9 @@
     width: 100%; /* 전체 너비 */
     background-color: #1e0e1c; /* 어두운 배경색 */
     color: #C8B8DB; /* 밝은 회색 글자 */
-    text-align: center; /* 텍스트 가운데 정렬 */
-    padding: 10px 0; /* 상하 패딩 */
+    text-align: center; /* 텍스트 오른쪽 정렬 */
+    padding: 10px 0px; /* 상우하좌 패딩 */
+    font-size: 12px; /* 글자 크기 */
     }
 
     /* Footer 제목 스타일 */
@@ -77,62 +79,110 @@
     color: #F9F4F5; /* 밝은 글자색 */
     font-weight: bold; /* 굵은 글자 */
     font-size: 20px; /* 제목 크기 */
-    margin-bottom: 15px; /* 제목과 내용 사이의 간격 */
+    margin-bottom: 25px; /* 제목과 내용 사이의 간격 */
     }
+
+    #Instagram {
+    color: #d497cc;
+    font-size: 17px;
+    }
+    #Github {
+    color: #FFFFFF;
+    font-size: 17px;
+    }
+    #LinkedIn {
+    color: #0e76a8;
+    font-size: 17px;
+    }
+
+    /* 왼쪽 메뉴 바 영역 스타일 */
+    .left-menu-bar {
+    position: fixed; /* 페이지 상단에 고정 */
+    top: 0;
+    left: 0;
+    width: 200px; /* 왼쪽 메뉴 바의 너비 */
+    height: 100%; /* 페이지의 높이만큼 */
+    background-color: #1e0e1c; /* 배경색 */
+    color: #ffffff; /* 글자색 */
+    padding: 10px; /* 내부 패딩 */
+    box-sizing: border-box; /* 내부 패딩을 요소의 전체 크기에 포함 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 설정 */
+    }
+
+    /* 메뉴 항목 스타일 */
+    .menu-item {
+        margin-bottom: 10px; /* 메뉴 항목 사이의 간격 */
+        cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+    }
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-
-    <div class="title">hwk06023's page</div>
-
-    <div class="container">
-    <video autoplay="true" id="videoElement"></video>
-
-    <div class="menu">
-        <div class="menu-title">Menu bar</div>
-        <div class="menu-item" data-model="{detection model file}">- Detection</div>
-        <div class="menu-item" data-model="{segmentation model file}">- Segmentation</div>
-        <div class="menu-item" data-model="{pose estimation model file}">- Pose estimation</div>
-    </div>
-    </div>
-
     <script>
-    var video = document.querySelector("#videoElement");
+        var video = document.querySelector("#videoElement");
 
-    if (navigator.mediaDevices.getUserMedia) {
-    navigator.mediaDevices.getUserMedia({ video: true })
-    .then(function (stream) {
-        video.srcObject = stream;
-    })
-    .catch(function (err0r) {
-        console.log("Something went wrong!");
-    });
-    }
+        if (navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+            video.srcObject = stream;
+        })
+        .catch(function (err0r) {
+            console.log("Something went wrong!");
+        });
+        }
 
-    // 모델 추론 함수 (여기서는 실제 모델 추론 과정을 구현하지 않음)
-    function modelInference(modelFile) {
-    // 실제로는 여기에 모델 로딩 및 추론 코드가 포함됩니다.
-    // 예시를 위해 단순히 모델 파일명을 알림으로 표시합니다.
-    alert(`Model inference with ${modelFile}`);
-    }
+        // 모델 추론 함수 (여기서는 실제 모델 추론 과정을 구현하지 않음)
+        function modelInference(modelFile) {
+        // 실제로는 여기에 모델 로딩 및 추론 코드가 포함됩니다.
+        // 예시를 위해 단순히 모델 파일명을 알림으로 표시합니다.
+        alert(`Model inference with ${modelFile}`);
+        }
 
-    // 각 메뉴 항목에 이벤트 리스너 추가
-    document.querySelectorAll('.menu-item').forEach(item => {
-    item.addEventListener('click', event => {
-        // data-model 속성에서 모델 파일 경로를 가져옴
-        const modelFile = event.target.getAttribute('data-model');
-        // 모델 추론 함수 호출
-        modelInference(modelFile);
-    });
-    });
+        // 각 메뉴 항목에 이벤트 리스너 추가
+        document.querySelectorAll('.menu-item').forEach(item => {
+        item.addEventListener('click', event => {
+            // data-model 속성에서 모델 파일 경로를 가져옴
+            const modelFile = event.target.getAttribute('data-model');
+            // 모델 추론 함수 호출
+            modelInference(modelFile);
+        });
+        });
 
     </script>
 
-    <footer>
-        <div class="footer-title">Contact</div>
-        <p><b>Phone-number:</b> +82 10-3132-5914 </p>  
-        <p><b>Email:</b> hwk06023@gmail.com / hwk06023@hanyang.ac.kr</p>  
-    </footer>
+    <div class="title">hwk06023's page</div>
 
+    <!-- 왼쪽 메뉴 바 영역 -->
+    <div class="left-menu-bar">
+        <div class="menu-title">Menu bar</div>
+        <div class="menu-item">- Left Menu Item 1</div>
+        <div class="menu-item">- Left Menu Item 2</div>
+        <!-- 필요한 만큼 메뉴 항목 추가 -->
+    </div>
+
+    <div class="container" style="margin-left: 220px;"> <!-- 왼쪽 메뉴 바의 너비 + 메뉴와의 간격 만큼 컨텐츠를 오른쪽으로 밀어줌 -->
+
+        <div class="container">
+        <video autoplay="true" id="videoElement"></video>
+
+        <div class="menu">
+            <div class="menu-title">Inference</div>
+            <div class="menu-item" data-model="{detection model file}">- Detection</div>
+            <div class="menu-item" data-model="{segmentation model file}">- Segmentation</div>
+            <div class="menu-item" data-model="{pose estimation model file}">- Pose estimation</div>
+        </div>
+        </div>
+
+        <footer>
+            <div class="footer-title">Contact</div>
+            <p><b>SNS:&nbsp;</b> <a href="https://www.instagram.com/hyunw_62"><i class="fab fa-instagram" id="Instagram">  </i>  &nbsp;</a> 
+                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github" id="Github">  </i>  &nbsp;</a> 
+                <a href="https://www.linkedin.com/in/hyunwoo-kim-6b3a3b1b3/" target="_blank"><i class="fab fa-linkedin" id="LinkedIn"></i></a>
+            </p>
+            <p><b>Phone-number:</b> +82 10-3132-5914 </p>  
+            <p><b>Email:</b> hwk06023@gmail.com / hwk06023@hanyang.ac.kr</p>  
+        </footer>
+    </div>
 </body>
 </html>
