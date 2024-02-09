@@ -119,38 +119,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <script>
-        var video = document.querySelector("#videoElement");
-
-        if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-            video.srcObject = stream;
-        })
-        .catch(function (err0r) {
-            console.log("Something went wrong!");
-        });
-        }
-
-        // 모델 추론 함수 (여기서는 실제 모델 추론 과정을 구현하지 않음)
-        function modelInference(modelFile) {
-        // 실제로는 여기에 모델 로딩 및 추론 코드가 포함됩니다.
-        // 예시를 위해 단순히 모델 파일명을 알림으로 표시합니다.
-        alert(`Model inference with ${modelFile}`);
-        }
-
-        // 각 메뉴 항목에 이벤트 리스너 추가
-        document.querySelectorAll('.menu-item').forEach(item => {
-        item.addEventListener('click', event => {
-            // data-model 속성에서 모델 파일 경로를 가져옴
-            const modelFile = event.target.getAttribute('data-model');
-            // 모델 추론 함수 호출
-            modelInference(modelFile);
-        });
-        });
-
-    </script>
-
     <div class="title">hwk06023's page</div>
 
     <!-- 왼쪽 메뉴 바 영역 -->
@@ -165,6 +133,37 @@
 
         <div class="container">
         <video autoplay="true" id="videoElement"></video>
+        <script>
+            var video = document.querySelector("#videoElement");
+    
+            if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                video.srcObject = stream;
+            })
+            .catch(function (err0r) {
+                console.log("Something went wrong!");
+            });
+            }
+    
+            // 모델 추론 함수 (여기서는 실제 모델 추론 과정을 구현하지 않음)
+            function modelInference(modelFile) {
+            // 실제로는 여기에 모델 로딩 및 추론 코드가 포함됩니다.
+            // 예시를 위해 단순히 모델 파일명을 알림으로 표시합니다.
+            alert(`Model inference with ${modelFile}`);
+            }
+    
+            // 각 메뉴 항목에 이벤트 리스너 추가
+            document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', event => {
+                // data-model 속성에서 모델 파일 경로를 가져옴
+                const modelFile = event.target.getAttribute('data-model');
+                // 모델 추론 함수 호출
+                modelInference(modelFile);
+            });
+            });
+    
+        </script>    
 
         <div class="menu">
             <div class="menu-title">Inference</div>
@@ -177,8 +176,8 @@
         <footer>
             <div class="footer-title">Contact</div>
             <p><b>SNS:&nbsp;</b> <a href="https://www.instagram.com/hyunw_62"><i class="fab fa-instagram" id="Instagram">  </i>  &nbsp;</a> 
-                <a href="https://github.com/yourusername" target="_blank"><i class="fab fa-github" id="Github">  </i>  &nbsp;</a> 
-                <a href="https://www.linkedin.com/in/hyunwoo-kim-6b3a3b1b3/" target="_blank"><i class="fab fa-linkedin" id="LinkedIn"></i></a>
+                <a href="https://github.com/hwk06023" target="_blank"><i class="fab fa-github" id="Github">  </i>  &nbsp;</a> 
+                <a href="https://www.linkedin.com/in/현우-김-53086a290/" target="_blank"><i class="fab fa-linkedin" id="LinkedIn"></i></a>
             </p>
             <p><b>Phone-number:</b> +82 10-3132-5914 </p>  
             <p><b>Email:</b> hwk06023@gmail.com / hwk06023@hanyang.ac.kr</p>  
