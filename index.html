@@ -32,6 +32,7 @@
     transform: translateX(-50%);
     font-size: 40px;
     font-weight: bold;
+    color: #f6e8ff;
     }
     .subtitle {
     font-size: 20px;
@@ -39,7 +40,7 @@
     font-weight: lighter;
     }
     #videoElement {
-    border: 3px solid #51264c;
+    border: 2px solid #780078;
     max-width: 800px;
     max-height: 90vh;
     }
@@ -47,7 +48,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border: 2px solid #51264c;
+    border: 1.5px solid #780078;
     border-radius: 10px;
     height: 463px;
     }
@@ -56,7 +57,7 @@
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 10px;
-    color: #F9F4F5;
+    color: #dfd2f0;
     }
     .menu-subtitle {
     font-size: 12px;
@@ -75,7 +76,7 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #1e0e1c;
+    background-color: #280628;
     color: #C8B8DB;
     text-align: center;
     padding: 10px 0px;
@@ -83,6 +84,7 @@
     }
     .footer-title {
     color: #F9F4F5;
+    margin-top: 7px;
     font-weight: bold;
     font-size: 20px;
     margin-bottom: 25px;
@@ -150,8 +152,8 @@
             <div class="menu-subtitle">Click to see the project details</div>
             <div class="menu-item"><a href="https://github.com/hwk06023/Your-fingerprints-are-precious" target="_blank"> - Your fingerprints are precious</a></div>
             <div class="menu-item"><a href="https://github.com/hwk06023/Template_Matching_RealTime" target="_blank"> - Template Matching RealTime</a></div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/MyPhoto_madebyAI" target="_blank"> - MyPhoto_madebyAI </a></div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/WellnessMapDB" target="_blank"> - WellnessMapDB</a></div>
+            <div class="menu-item"><a href="https://github.com/hwk06023/MyPhoto_madebyAI" target="_blank"> - MyPhoto made by AI </a></div>
+            <div class="menu-item"><a href="https://github.com/hwk06023/WellnessMapDB" target="_blank"> - Wellness Map DataBase</a></div>
         </div>
         </div>
         <footer>
@@ -169,6 +171,9 @@
         const nodeCount = 100;
         const maxDistance = 150;
         const mouseInfluenceSize = 100;
+        const minBrightness = 0; // 최소 밝기
+        const maxBrightness = 250; // 최대 밝기
+        const brightnessStep = 1; // 밝기가 변화하는 단계
     
         function setup() {
             let canvas = createCanvas(windowWidth, windowHeight);
@@ -180,7 +185,9 @@
                 nodes.push({
                     position: createVector(random(width), random(height)),
                     velocity: createVector(random(-0.3, 0.3), random(-0.3, 0.3)),
-                    brightness: random(50, 150)
+                    brightness: random(50, 150), // 밝기
+                    increasing: true, // 밝기 증가 여부
+                    size: random(2, 15) // 원의 크기를 결정하는 랜덤 값
                 });
             }
         }
@@ -216,10 +223,20 @@
                 let alpha = map(node.brightness, 50, 150, 100, 200);
                 fill(140, 0, 140, alpha);
                 noStroke();
-                ellipse(node.position.x, node.position.y, 8, 8);
+                ellipse(node.position.x, node.position.y, node.size, node.size);
     
-                node.brightness += random(-5, 5);
-                node.brightness = constrain(node.brightness, 50, 150);
+                // 밝기 조절 로직
+                if (node.increasing) {
+                    node.brightness += brightnessStep;
+                    if (node.brightness >= maxBrightness) {
+                        node.increasing = false;
+                    }
+                } else {
+                    node.brightness -= brightnessStep;
+                    if (node.brightness <= minBrightness) {
+                        node.increasing = true;
+                    }
+                }
     
                 node.position.add(node.velocity);
                 if (node.position.x < 0 || node.position.x > width) node.velocity.x *= -1;
