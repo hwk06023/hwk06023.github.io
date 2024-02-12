@@ -1,248 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-    a {
-        color: inherit; /* Makes the link color the same as the surrounding text */
-        text-decoration: none; /* Removes the underline */
-    }
-    canvas { position: fixed; top: 0; left: 0; z-index: -1; }
-    body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #000000;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    overflow: hidden;
-    }
-    .container {
-    display: flex;
-    align-items: start;
-    gap: 20px;
-    margin-top: -40px;
-    margin-left: -200px;
-    }
-    .title {
-    position: absolute;
-    top: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 40px;
-    font-weight: bold;
-    color: #f6e8ff;
-    }
-    .subtitle {
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-weight: lighter;
-    }
-    #videoElement {
-    border: 2px solid #780078;
-    max-width: 800px;
-    max-height: 90vh;
-    }
-    .menu {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    border: 1.5px solid #780078;
-    border-radius: 10px;
-    height: 463px;
-    }
-    .menu-title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #dfd2f0;
-    }
-    .menu-subtitle {
-    font-size: 12px;
-    text-align: center;
-    margin-bottom: 35px;
-    font-weight: lighter;
-    color: #9f8fb3;
-    }
-    .menu-item {
-    margin: 10px 0;
-    cursor: pointer;
-    color: #C8B8DB;
-    }
-    footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: #280628;
-    color: #C8B8DB;
-    text-align: center;
-    padding: 10px 0px;
-    font-size: 12px;
-    }
-    .footer-title {
-    color: #F9F4F5;
-    margin-top: 7px;
-    font-weight: bold;
-    font-size: 20px;
-    margin-bottom: 25px;
-    }
-    #Instagram {
-    color: #d497cc;
-    font-size: 17px;
-    }
-    #Github {
-    color: #FFFFFF;
-    font-size: 17px;
-    }
-    #LinkedIn {
-    color: #0e76a8;
-    font-size: 17px;
-    }
-    .menu-item {
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
-    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <!-- TensorFlow.js 라이브러리 추가 -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <link rel="stylesheet" href="./index.css">
 </head>
 <body>
     <div class="title">hwk06023's page</div>
     <div class="container" style="flex-direction: column; margin-left: 220px;">
         <div class="container">
-        <video autoplay="true" id="videoElement"></video>
-        <script>
-            var video = document.querySelector("#videoElement");
-    
-            if (navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-            .then(function (stream) {
-                video.srcObject = stream;
-            })
-            .catch(function (err0r) {
-                console.log("Something went wrong!");
-            });
-            }
-    
-            function modelInference(modelFile) {
-            alert(`Model inference with ${modelFile}`);
-            }
-    
-            document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', event => {
-                const modelFile = event.target.getAttribute('data-model');
-                modelInference(modelFile);
-            });
-            });
-    
-        </script>    
-        <div class="menu">
-            <div class="menu-title">Inference</div>
-            <div class="menu-subtitle">Select a model to perform inference</div>
-            <div class="menu-item" data-model="{detection model file}"> - Object Detection</div>
-            <div class="menu-item" data-model="{segmentation model file}"> - Segmentation</div>
-            <div class="menu-item" data-model="{pose estimation model file}"> - Pose estimation</div>
-            <div class="menu-item" data-model="{FER model file}"> - Facial Expression Recognition</div>
-        </div>
-        <div class="menu">
-            <div class="menu-title">&nbsp; hwk06023's Project &nbsp;</div>
-            <div class="menu-subtitle">Click to see the project details</div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/Your-fingerprints-are-precious" target="_blank"> - Your fingerprints are precious</a></div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/Template_Matching_RealTime" target="_blank"> - Template Matching RealTime</a></div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/MyPhoto_madebyAI" target="_blank"> - MyPhoto made by AI </a></div>
-            <div class="menu-item"><a href="https://github.com/hwk06023/WellnessMapDB" target="_blank"> - Wellness Map DataBase</a></div>
-        </div>
+            <video autoplay="true" id="videoElement"></video>
+            <script src="./index.js"></script>
+            <div class="menu">
+                <div class="menu-title">Inference</div>
+                <div class="menu-subtitle">Select a model to perform inference</div>
+                <div class="menu-item" data-model="{detection model file}"> - Object Detection</div>
+                <div class="menu-item" data-model="{segmentation model file}"> - Segmentation</div>
+                <div class="menu-item" data-model="{pose estimation model file}"> - Pose estimation</div>
+                <div class="menu-item" data-model="{FER model file}"> - Facial Expression Recognition</div>
+            </div>
+            <div class="menu">
+                <div class="menu-title">&nbsp; hwk06023's Project &nbsp;</div>
+                <div class="menu-subtitle">Click to see the project details</div>
+                <div class="menu-item"><a href="https://github.com/hwk06023/Your-fingerprints-are-precious" target="_blank"> - Your fingerprints are precious</a></div>
+                <div class="menu-item"><a href="https://github.com/hwk06023/Template_Matching_RealTime" target="_blank"> - Template Matching RealTime</a></div>
+                <div class="menu-item"><a href="https://github.com/hwk06023/MyPhoto_madebyAI" target="_blank"> - MyPhoto made by AI </a></div>
+                <div class="menu-item"><a href="https://github.com/hwk06023/WellnessMapDB" target="_blank"> - Wellness Map DataBase</a></div>
+            </div>
         </div>
         <footer>
-            <div class="footer-title">Contact</div>
-            <p><b>SNS:&nbsp;</b> <a href="https://www.instagram.com/hyunw_62" target="_blank"><i class="fab fa-instagram" id="Instagram">  </i>  &nbsp;</a> 
-                <a href="https://github.com/hwk06023" target="_blank"><i class="fab fa-github" id="Github">  </i>  &nbsp;</a> 
-                <a href="https://www.linkedin.com/in/현우-김-53086a290/" target="_blank"><i class="fab fa-linkedin" id="LinkedIn"></i></a>
-            </p>
-            <p><b>Phone-number:</b> +82 10-3132-5914 </p>  
-            <p><b>Email:</b> hwk06023@gmail.com / hwk06023@hanyang.ac.kr</p>  
+            <div class="footer-left">
+                <div class="footer-title">Contact</div>
+            </div>
+            <div class="footer-right">
+                <p><b>SNS:&nbsp;</b> <a href="https://www.instagram.com/hyunw_62" target="_blank"><i class="fab fa-instagram" id="Instagram"></i>&nbsp;</a>
+                    <a href="https://github.com/hwk06023" target="_blank"><i class="fab fa-github" id="Github"></i>&nbsp;</a>
+                    <a href="https://www.linkedin.com/in/현우-김-53086a290/" target="_blank"><i class="fab fa-linkedin" id="LinkedIn"></i></a>
+                </p>
+                <p><b>Phone-number:</b> +82 10-3132-5914</p>
+                <p><b>Email:</b> hwk06023@gmail.com / hwk06023@hanyang.ac.kr</p>
+            </div>
         </footer>
     </div>
-    <script>
-        let nodes = [];
-        const nodeCount = 100;
-        const maxDistance = 150;
-        const mouseInfluenceSize = 100;
-        const minBrightness = 0; // 최소 밝기
-        const maxBrightness = 250; // 최대 밝기
-        const brightnessStep = 1; // 밝기가 변화하는 단계
     
-        function setup() {
-            let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.style('position', 'fixed');
-            canvas.style('top', '0');
-            canvas.style('left', '0');
-            canvas.style('z-index', '-1');
-            for (let i = 0; i < nodeCount; i++) {
-                nodes.push({
-                    position: createVector(random(width), random(height)),
-                    velocity: createVector(random(-0.3, 0.3), random(-0.3, 0.3)),
-                    brightness: random(50, 150), // 밝기
-                    increasing: true, // 밝기 증가 여부
-                    size: random(2, 15) // 원의 크기를 결정하는 랜덤 값
-                });
-            }
-        }
-    
-        function draw() {
-            background(0);
-    
-            nodes.forEach((node, i) => {
-                let mouseDistance = dist(node.position.x, node.position.y, mouseX, mouseY);
-    
-                if (mouseDistance < mouseInfluenceSize) {
-                    let attraction = p5.Vector.sub(createVector(mouseX, mouseY), node.position);
-                    attraction.setMag(0.5);
-                    node.velocity.lerp(attraction, 0.2);
-                }
-    
-                let lineAlpha = map(mouseDistance, 0, mouseInfluenceSize, 255, 220); // 마우스와 가까울수록 선이 더 진하게
-                stroke(140, 0, 140, lineAlpha);
-                strokeWeight(1);
-                for (let j = i + 1; j < nodes.length; j++) {
-                    let otherNode = nodes[j];
-                    let distance = dist(node.position.x, node.position.y, otherNode.position.x, otherNode.position.y);
-                    if (distance < maxDistance) {
-                        line(node.position.x, node.position.y, otherNode.position.x, otherNode.position.y);
-                    }
-                }
-    
-                // 마우스 위치에도 간선 연결
-                if (mouseDistance < maxDistance) {
-                    line(node.position.x, node.position.y, mouseX, mouseY);
-                }
-    
-                let alpha = map(node.brightness, 50, 150, 100, 200);
-                fill(140, 0, 140, alpha);
-                noStroke();
-                ellipse(node.position.x, node.position.y, node.size, node.size);
-    
-                // 밝기 조절 로직
-                if (node.increasing) {
-                    node.brightness += brightnessStep;
-                    if (node.brightness >= maxBrightness) {
-                        node.increasing = false;
-                    }
-                } else {
-                    node.brightness -= brightnessStep;
-                    if (node.brightness <= minBrightness) {
-                        node.increasing = true;
-                    }
-                }
-    
-                node.position.add(node.velocity);
-                if (node.position.x < 0 || node.position.x > width) node.velocity.x *= -1;
-                if (node.position.y < 0 || node.position.y > height) node.velocity.y *= -1;
-            });
-        }
-    </script>    
 </body>
 </html>
