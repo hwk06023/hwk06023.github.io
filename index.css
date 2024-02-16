@@ -66,6 +66,9 @@ body {
     cursor: pointer;
     color: #C8B8DB;
 }
+.menu-item:hover {
+    color: antiquewhite;
+}
 footer {
     display: flex;
     justify-content: space-between;
